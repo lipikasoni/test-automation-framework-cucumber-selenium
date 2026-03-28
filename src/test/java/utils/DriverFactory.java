@@ -36,7 +36,7 @@ public class DriverFactory {
         options.addArguments("--disable-features=AutofillServerCommunication,AutofillEnableAccountWalletIntegration");
         options.addArguments("--incognito");
         options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/selenium-profile-" + System.currentTimeMillis());
-
+        options.addArguments("--headless=new");
         WebDriver driver = new ChromeDriver(options);
 
         getDriver().manage().window().maximize();
