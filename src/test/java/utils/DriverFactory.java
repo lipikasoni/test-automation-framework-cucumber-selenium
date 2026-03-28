@@ -20,28 +20,16 @@ public class DriverFactory {
         WebDriverManager.chromedriver().setup();
 
         ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
 
-        HashMap<String, Object> prefs = new HashMap<>();
-        prefs.put("credentials_enable_service", false);
-        prefs.put("profile.password_manager_enabled", false);
-        prefs.put("autofill.profile_enabled", false);
-        prefs.put("autofill.credit_card_enabled", false);
-        prefs.put("profile.default_content_setting_values.notifications", 2);
-
-        options.setExperimentalOption("prefs", prefs);
-        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
-        options.setExperimentalOption("useAutomationExtension", false);
-
-        options.addArguments("--disable-save-password-bubble");
-        options.addArguments("--disable-features=AutofillServerCommunication,AutofillEnableAccountWalletIntegration");
-        options.addArguments("--incognito");
-        options.addArguments("--user-data-dir=" + System.getProperty("java.io.tmpdir") + "/selenium-profile-" + System.currentTimeMillis());
+        // optional for CI
         options.addArguments("--headless=new");
-        WebDriver driver = new ChromeDriver(options);
 
-        getDriver().manage().window().maximize();
+        WebDriver webDriver = new ChromeDriver(options);
+        driver.set(webDriver);
+
+        webDriver.manage().window().maximize();
     }
-
     public static void quitDriver() {
         getDriver().quit();
         driver.remove();

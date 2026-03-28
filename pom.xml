@@ -68,4 +68,23 @@
             <version>2.21.1</version>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+
+                    <!-- 🔥 THIS IS THE KEY FIX -->
+                    <proc>none</proc>
+
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
 </project>

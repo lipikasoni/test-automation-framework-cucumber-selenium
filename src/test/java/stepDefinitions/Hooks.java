@@ -17,12 +17,18 @@ public class Hooks {
     @After
     public void tearDown(Scenario scenario) {
 
-        if (scenario.isFailed()) {
-            byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver())
-                    .getScreenshotAs(OutputType.BYTES);
-            scenario.attach(screenshot, "image/png", "Failure Screenshot");
+        if (DriverFactory.getDriver() != null) {
+
+            if (scenario.isFailed()) {
+                byte[] screenshot = ((TakesScreenshot) DriverFactory.getDriver())
+                        .getScreenshotAs(OutputType.BYTES);
+                scenario.attach(screenshot, "image/png", "Failure Screenshot");
+            }
+
+            DriverFactory.quitDriver();
         }
+    }
 
 //        DriverFactory.quitDriver();
-    }
+
 }
