@@ -3,22 +3,27 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class HomePage {
+public class HomePage extends BasePage {
 
-    WebDriver driver;
+    public HomePage(WebDriver driver) {
+        super(driver);
+    }
 
     private By addToCartBtn = By.id("add-to-cart-sauce-labs-backpack");
     private By cartIcon = By.className("shopping_cart_link");
-
-    public HomePage(WebDriver driver) {
-        this.driver = driver;
-    }
+    private By menuBtn = By.id("react-burger-menu-btn");
+    private By logoutBtn = By.id("logout_sidebar_link");
 
     public void addProductToCart() {
-        driver.findElement(addToCartBtn).click();
+        click(addToCartBtn);
     }
 
     public void openCart() {
-        driver.findElement(cartIcon).click();
+        click(cartIcon);
+    }
+
+    public void logout() {
+        click(menuBtn);
+        click(logoutBtn);
     }
 }

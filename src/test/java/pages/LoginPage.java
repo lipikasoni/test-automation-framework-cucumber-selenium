@@ -3,30 +3,30 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
-public class LoginPage {
+public class LoginPage extends BasePage {
 
-    WebDriver driver;
-
-    private By username = By.name("user-name");
-    private By password = By.id("password");
-    private By loginBtn = By.xpath("//*[@id=\"login-button\"]");
-    private By errorMsg = By.xpath("//*[@id=\"login_button_container\"]/div/form/div[3]/h3");
     public LoginPage(WebDriver driver) {
-        this.driver = driver;
+        super(driver);
     }
 
+    private By username = By.id("user-name");
+    private By password = By.id("password");
+    private By loginBtn = By.id("login-button");
+    private By errorMsg = By.cssSelector("h3[data-test='error']");
+
     public void enterUsername(String user) {
-        driver.findElement(username).sendKeys(user);
+        sendKeys(username, user);
     }
 
     public void enterPassword(String pass) {
-        driver.findElement(password).sendKeys(pass);
+        sendKeys(password, pass);
     }
 
     public void clickLogin() {
-        driver.findElement(loginBtn).click();
+        click(loginBtn);
     }
+
     public String getErrorMessage() {
-        return driver.findElement(errorMsg).getText();
+        return getText(errorMsg);
     }
 }

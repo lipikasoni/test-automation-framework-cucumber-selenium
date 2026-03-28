@@ -23,6 +23,6 @@ public class Hooks {
             scenario.attach(screenshot, "image/png", "Failure Screenshot");
         }
 
-        DriverFactory.quitDriver();
+//        DriverFactory.quitDriver();
     }
 }
